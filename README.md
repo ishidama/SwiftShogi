@@ -92,3 +92,7 @@ MIT
 ## Contact
 
 Jiro Nagashima ([@hedjirog](https://twitter.com/hedjirog))
+
+
+## Misc
+This is a Forked for learning.
