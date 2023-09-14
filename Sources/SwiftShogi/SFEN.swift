@@ -3,22 +3,25 @@
 /// - SeeAlso:
 /// [SFEN (Wikipedia)](https://en.wikipedia.org/wiki/Shogi_notation#SFEN)
 public struct SFEN {
-    public static let `default` = Self(string: "lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -")!
+    public static let `default` = Self(string: "lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")!
 
     public let board: Board
     public let color: Color
     public let capturedPieces: [Piece]
+    public let numOfMove: Int
 
     public init?(string: String) {
         guard
             let fields = Fields(string: string),
             let board = fields.board,
             let color = fields.color,
-            let pieces = fields.capturedPieces
+            let pieces = fields.capturedPieces,
+            let numOfMove = fields.numOfMove
             else { return nil }
         self.board = board
         self.color = color
         self.capturedPieces = pieces
+        self.numOfMove = numOfMove
     }
 }
 
@@ -27,6 +30,7 @@ extension SFEN {
         private let boardString: String
         private let colorString: String
         private let capturedPiecesString: String
+        private let numOfMoveString: String
 
         init?(string: String) {
             let strings = string.split(separator: SFEN.fieldSeparator).map(String.init)
@@ -34,6 +38,7 @@ extension SFEN {
             self.boardString = strings[0]
             self.colorString = strings[1]
             self.capturedPiecesString = strings[2]
+            self.numOfMoveString = strings[3]
         }
     }
 }
@@ -102,6 +107,10 @@ extension SFEN.Fields {
             }
         }
         return pieces
+    }
+    
+    var numOfMove: Int? {
+        Int(numOfMoveString)
     }
 }
 
