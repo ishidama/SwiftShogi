@@ -110,7 +110,11 @@ extension SFEN.Fields {
     }
     
     var numOfMove: Int? {
-        Int(numOfMoveString)
+        if let intValue = Int(numOfMoveString) {
+            return intValue
+        } else {
+            return nil
+        }
     }
 }
 
